@@ -13,5 +13,5 @@ rm -rf $project_lk
 rm -rf $project_lib
 
 svn --username $svn_username --password $svn_password checkout https://10.10.10.10/svn/happy3600/mobilek/server/GameServer/Server_language $project_gs
-svn --username $svn_username --password $svn_password checkout https://10.10.10.10/svn/happy3600/mobilek/server/GameServer/ServerLibs $project_lib
+svn --username $svn_username --password $svn_password checkout https://10.10.10.10/svn/happy3600/mobilek/server/GameServer/ServerLibs/lib $project_lib
 svn --username $svn_username --password $svn_password checkout https://10.10.10.10/svn/happy3600/mobilek/server/LK_AGIP/Project $project_lk
