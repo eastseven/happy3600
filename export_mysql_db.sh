@@ -14,6 +14,6 @@ echo 'export game_user system tables'
 /usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} --databases ${game_user} --skip-comments --no-create-db --tables tb_sysmodule tb_user tb_role > game_user_systable.sql
 
 echo 'export game_db,game_user,game_count database'
-/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} -d ${game_user}  > ${game_user}.sql
-/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} -d ${game_db}    > ${game_db}.sql
-/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} -d ${game_count} > ${game_count}.sql
+/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} --routines --no-data --add-drop-database -B ${game_user}  > ${game_user}.sql
+/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} --routines --no-data --add-drop-database -B ${game_db}    > ${game_db}.sql
+/usr/local/mysql/bin/mysqldump -h${db_ip} -u${db_user} -p${db_password} --routines --no-data --add-drop-database -B ${game_count} > ${game_count}.sql
