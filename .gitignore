@@ -1,3 +1,5 @@
 gameserver/
 gameserver_libs/
 gameserver_lk_agip/
+
+*.sql
