@@ -14,3 +14,5 @@ game_count=game_count
 /usr/local/mysql/bin/mysql -h${db_ip} -u${db_user} -p${db_password} < ${game_db}_systable.sql
 
 /usr/local/mysql/bin/mysql -h${db_ip} -u${db_user} -p${db_password} < ${game_count}.sql
+
+# /usr/local/mysql/bin/mysql -h10.10.10.22 -umysql -p123456 < 
