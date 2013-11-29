@@ -62,7 +62,7 @@ echo `date "+%Y-%m-%d %H:%M:%S"`': ''----系统数据表，（导系统数据）
 # ==================== 华丽的分割线 ====================
 echo `date "+%Y-%m-%d %H:%M:%S"`': ''第二步 将数据导入目标数据库'
 echo `date "+%Y-%m-%d %H:%M:%S"`': ''----系统数据表，导入开始 ----'
-$MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw < $var_target_db
+$MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw < $var_source_systable_bak_file
 $MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw <<EOF
 call sp_hefu_clear(1);
 quit;
