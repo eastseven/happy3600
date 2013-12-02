@@ -38,9 +38,18 @@ echo `date "+%Y-%m-%d %H:%M:%S"`': ''第零步 合服前，备份数据库'
 #MYSQL_DUMP -h$var_target_ip -u$var_target_user -p$var_target_psw \
 #--skip-comments --compact --no-create-db --databases $var_target_db > $var_target_db'_target_bak.sql'
 
-echo `date "+%Y-%m-%d %H:%M:%S"`': ''第零步 导入合服用存储过程'
-$MYSQL $var_source_db -h$var_source_ip -u$var_source_user -p$var_source_psw < $var_hefu_sp
-$MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw < $var_hefu_sp
+echo `date "+%Y-%m-%d %H:%M:%S"`': ''第零步 合服前source库UID数据'
+$MYSQL $var_source_db -h$var_source_ip -u$var_source_user -p$var_source_psw <<EOF
+select count(uid) from role;
+EOF
+echo `date "+%Y-%m-%d %H:%M:%S"`': ''第零步 合服前target库UID数据'
+$MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw <<EOF
+select count(uid) from role;
+EOF
+echo `date "+%Y-%m-%d %H:%M:%S"`': ''第零步 合服前target库中重复source库中的UID数据'
+$MYSQL -h$var_target_ip -u$var_target_user -p$var_target_psw <<EOF
+select r8.uid from $var_source_db.role r8 where exists (select 1 from $var_target_db.role r9 where r8.uid = r9.uid);
+EOF
 
 echo `date "+%Y-%m-%d %H:%M:%S"`': ''第一步 合服迁移数据导出(在命令行执行)'
 echo `date "+%Y-%m-%d %H:%M:%S"`': ''----数据清理：调用每个合服数据库的数据清理存储过程:call sp_hefu_clear() ----'
@@ -88,6 +97,12 @@ $MYSQL $var_login_db -h$var_login_ip -u$var_login_user -p$var_login_psw <<EOF
 $var_update_sql ;
 commit;
 
+EOF
+
+# ==================== 华丽的分割线 ====================
+echo `date "+%Y-%m-%d %H:%M:%S"`': ''第五步 合服后target库UID数据'
+$MYSQL $var_target_db -h$var_target_ip -u$var_target_user -p$var_target_psw <<EOF
+select count(uid) from role;
 EOF
 
 # ==================== 华丽的分割线 ====================

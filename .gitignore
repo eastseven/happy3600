@@ -3,3 +3,4 @@ gameserver_libs/
 gameserver_lk_agip/
 
 *.sql
+!merge_data_procedure.sql
