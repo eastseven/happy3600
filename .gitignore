@@ -4,3 +4,5 @@ gameserver_lk_agip/
 
 *.sql
 !merge_data_procedure.sql
+
+tmp*/
