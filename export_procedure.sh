@@ -19,10 +19,10 @@ if [ -z "$MYSQL" ]; then
 	MYSQL=/usr/local/mysql/bin/mysql
 fi
 
-$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
+$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -t -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
 
 var_dbname=game_count
-$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
+$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -t -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
 
 var_dbname=game_user
-$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
+$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -t -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_dbname}_sp.sql
