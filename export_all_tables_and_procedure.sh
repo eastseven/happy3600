@@ -36,9 +36,12 @@ var_sysdata_file=game_count_sysdata.sql
 var_systable=`cat system_table_gamecount.txt`
 echo `date "+%Y-%m-%d %H:%M:%S"`': 导出游戏服统计表结构、存储过程' >> merge.log
 $MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -d -R ${var_dbname} > $PWD/$var_tmpdir/${var_all_table}
-echo `date "+%Y-%m-%d %H:%M:%S"`': 导出游戏服统计系统数据' >> merge.log
-$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -t ${var_dbname} ${var_systable} > $PWD/$var_tmpdir/${var_sysdata_file}
-
+if [ -z "$var_systable" ]; then
+	echo `date "+%Y-%m-%d %H:%M:%S"`': 游戏服统计系统数据没有' >> merge.log
+else 	
+	echo `date "+%Y-%m-%d %H:%M:%S"`': 导出游戏服统计系统数据' >> merge.log
+	$MYSQLDUMP -h${var_dbhost} -u${var_dbuser} -p${var_dbpass} -n -t ${var_dbname} ${var_systable} > $PWD/$var_tmpdir/${var_sysdata_file}
+fi
 
 var_dbname=game_user
 var_systable=`cat system_table_gameuser.txt`
